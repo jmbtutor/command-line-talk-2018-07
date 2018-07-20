@@ -38,7 +38,7 @@ Environment variables provide a simple way to pass data to an application.
 You can see all the environment variables defined for your current shell
 using the `env` command:
 
-    $ env
+    env
 
 Some important environment variables are:
 
@@ -52,7 +52,7 @@ Some important environment variables are:
 You can access the contents of a variable by prepending a `$`. For
 example, to print out the contents of the `PATH` environment variable:
 
-    $ echo "$PWD"
+    echo "$PWD"
 
 Do this to set a variable:
 
@@ -72,11 +72,21 @@ itself, not its contents.
 
 To make this permanent, add it to your shell's config file.
 
-TODO
+To temporarily set an environment variable for the current command,
+prepend the command with variable assignments or use the `env` command.
+There is a script called `echo-editor` in the `scripts` folder that will
+echo out the value of the `EDITOR` variable.
 
-### `PATH`: The search path for executables
+    EDITOR=/usr/bin/nano ./scripts/echo-editor
 
+To delete a variable, use the `unset` command:
 
+    unset EDITOR
+
+## Executables
+
+Commands like `ls` and `cp` aren't built-in commands. They're external
+binaries found in the filesystem.
 
 ## Viewing files without an editor
 
