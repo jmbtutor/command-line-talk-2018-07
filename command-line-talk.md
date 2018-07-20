@@ -110,6 +110,8 @@ is named the same as a frequently used command like `ls`. If `.` is in
 your `PATH`, especially if it's first, you'll run the malicious
 script instead of the real `ls`.
 
+
 ## Viewing files without an editor
 
-
+To view text files in a terminal, the preferred way is to use a pager.
+One of the most popular pagers is called `less`.
