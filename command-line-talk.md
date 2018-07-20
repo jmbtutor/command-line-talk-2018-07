@@ -88,6 +88,28 @@ To delete a variable, use the `unset` command:
 Commands like `ls` and `cp` aren't built-in commands. They're external
 binaries found in the filesystem.
 
+Normally, you'd have to specify a path to be able to run the executable.
+However, there is a colon-separated list of paths stored in the
+environment variable called `PATH`; if your command does not have a
+path, the shell will search for the executable name in the paths listed
+in `PATH` in order and it will run the first one it finds.
+
+For example, if `~/bin` holds your personal scripts, you can call any of
+your scripts without a path by adding `~/bin` to your `PATH`:
+
+    export PATH="${HOME}/bin:${PATH}"
+
+The above will add `~/bin` to the start of your `PATH`. Since `~/bin`
+will be searched first, you should be careful not to accidentally shadow
+important commands like `ls`.
+
+Shadowing commands is a very good reason not to add `.` (the current
+directory) to your `PATH`. You might unsuspectingly have a malicious
+script in your current directory (e.g. from an untrusted tarball) that
+is named the same as a frequently used command like `ls`. If `.` is in
+your `PATH`, especially if it's first, you'll run the malicious
+script instead of the real `ls`.
+
 ## Viewing files without an editor
 
 
