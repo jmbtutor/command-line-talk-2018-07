@@ -114,4 +114,28 @@ script instead of the real `ls`.
 ## Viewing files without an editor
 
 To view text files in a terminal, the preferred way is to use a pager.
-One of the most popular pagers is called `less`.
+The pager included with most Unix-like systems is `less`.
+
+You can pass the file as an argument to `less` to view the file. For
+example, to view the file `/usr/share/dict/words`:
+
+    less /usr/share/dict/words
+
+You can also pipe command output to `less` to page its output. For
+example, to view in `less` all the words in `/usr/share/dict/words` that
+contain the substring `term`:
+
+    grep 'term' /usr/share/dict/words | less
+
+You can move around in `less` using your arrow keys or using vi-like
+movements. Exit by pressing `q`.
+
+`less` is a powerful pager with lots of features. Press `h` to see the
+help or read the man page. Some of the more useful features are:
+
+- `-S` flag: chop long lines
+- `-R` flag: interpret ANSI escape sequences (useful for coloured output)
+  - e.g. `grep --color=always 'term' | less -R`
+- `/` and `?`: search forward and backward respectively
+- `&`: show only matching lines
+- `v`: open the file in `$VISUAL`/`$EDITOR`/`vi`
