@@ -31,6 +31,17 @@ option key as the meta key.
 
 ## Running a command in multiple directories
 
+To run the same command in multiple directories, you can use a `for`
+loop. The following will run `npm install` in `dir1`, `dir2` and `dir3`:
+
+    for dir in dir1 dir2 dir3; do (cd "$dir" && npm install); done
+
+If you want to run a command in all directories directly under the
+current directory, you can use the `*` glob to match everything (note
+that this will not catch hidden directories):
+
+    for dir in *; do (cd "$dir" && npm install); done
+
 ## Environment variables
 
 Environment variables provide a simple way to pass data to an application.
