@@ -32,9 +32,21 @@ option key as the meta key.
 ## Running a command in multiple directories
 
 To run the same command in multiple directories, you can use a `for`
-loop. The following will run `npm install` in `dir1`, `dir2` and `dir3`:
+loop. The general idea is this: for each directory, `cd` into the
+directory and run your commands. The following will run `npm install` in
+`dir1`, `dir2` and `dir3`:
 
     for dir in dir1 dir2 dir3; do (cd "$dir" && npm install); done
+
+In this example, `dir` is the name of the variable that will hold the
+directory in each iteration. `dir1`, `dir2` and `dir3` are the paths to
+the directories in which you want to run the command. The body of the
+`for` loop, `(cd "$dir" && npm install)` runs the command in a subshell
+(the `()` denotes a subshell and is not part of the loop structure) so
+that the effect of `cd` is not seen outside the subshell. If your
+commands require setting a variable, you can't use a subshell since
+changes to variables aren't seen outside subshells; use `pushd` and
+`popd` instead.
 
 If you want to run a command in all directories directly under the
 current directory, you can use the `*` glob to match everything (note
