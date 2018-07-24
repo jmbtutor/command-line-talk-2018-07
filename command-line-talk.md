@@ -29,6 +29,58 @@ option key as the meta key.
 [meta osx]: http://osxdaily.com/2013/02/01/use-option-as-meta-key-in-mac-os-x-terminal/
 
 
+## Traversing directories
+
+Your shell has the concept of a working directory, which is what all
+relative paths are relative to.
+
+To view your current working directory, use the `pwd` command ("present
+working directory).
+
+    pwd
+
+To change your working directory, use the `cd` command ("change
+directory"). `cd` takes a path, either absolute or relative, which is
+what you want your working directory to be. For example, to change your
+working directory to the `mydir` directory:
+
+    cd mydir
+
+You can `cd` into directories multiple levels deep as well:
+
+    cd mydir/mysubdir/mysubsubdir
+
+The parent directory is denoted by `..`.
+
+    cd ..
+
+Simply doing `cd` with no arguments takes you to your home directory:
+
+    cd
+
+Your shell remembers the last directory you were in. You can `cd` there
+by passing `-`:
+
+    cd -
+
+If you want to remember more than that, you can make use of the
+directory stack, managed by the `pushd`, `popd` and `dirs` commands. The
+`pushd` command will push the current directory to the directory stack
+and change to the directory you specify. The `popd` command changes to
+the directory on the top of the stack and pops it off the stack. The
+`dirs` command will show you the contents of the stack, with the
+left-most directory being the top of the stack.
+
+    pushd ~
+    pwd
+    pushd /
+    pwd
+    dirs
+    popd
+    popd
+    pwd
+
+
 ## Running a command in multiple directories
 
 To run the same command in multiple directories, you can use a `for`
