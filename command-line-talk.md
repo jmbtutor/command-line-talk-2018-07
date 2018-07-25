@@ -50,11 +50,19 @@ You can `cd` into directories multiple levels deep as well:
 
     cd mydir/mysubdir/mysubsubdir
 
-The parent directory is denoted by `..`.
+The parent directory is denoted by `..` and can be used as a component
+of a path. For example, to go up two directories:
 
-    cd ..
+    cd ../..
 
-Simply doing `cd` with no arguments takes you to your home directory:
+Your home directory is denoted by `~` and can be used as the first
+component of a path. For example, to go into the `Documents` directory
+inside your home directory:
+
+    cd ~/Documents
+
+Simply doing `cd` with no arguments takes you to your
+home directory:
 
     cd
 
