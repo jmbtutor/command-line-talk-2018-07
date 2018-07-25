@@ -80,6 +80,11 @@ left-most directory being the top of the stack.
     popd
     pwd
 
+### What's the difference between a directory and a folder?
+
+The term "folder" is a higher-level concept than "directory". The term
+"folder" tends to be used for GUI objects and 
+
 
 ## Running a command in multiple directories
 
@@ -214,3 +219,36 @@ help or read the man page. Some of the more useful features are:
 - `/` and `?`: search forward and backward respectively
 - `&`: show only matching lines
 - `v`: open the file in `$VISUAL`/`$EDITOR`/`vi`
+
+
+## Getting help
+
+Many commands will take a `--help` flag and print a short usage
+message.
+
+For example, to view the various flags of `ls`:
+
+    ls --help
+
+For more information, look up the command's manual page using the `man`
+command. For `ls`:
+
+    man ls
+
+You can get a one-line description of a command using `man -f` or
+`whatis`:
+
+    man -f ls
+    whatis ls
+
+You can also search these one-line descriptions using `man -k` or
+`apropos`:
+
+   man -k "list"
+   apropos "list"
+
+On Linux, a more comprehensive manual may be read using the `info`
+command, especially for GNU utilities. If there is no `info` manual for
+the command, it will fall back to the command's man page.
+
+    info ls
