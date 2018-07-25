@@ -82,8 +82,10 @@ left-most directory being the top of the stack.
 
 ### What's the difference between a directory and a folder?
 
-The term "folder" is a higher-level concept than "directory". The term
-"folder" tends to be used for GUI objects and 
+The term "folder" is a higher-level concept than "directory". A folder
+is an object that holds documents, whereas a directory is an object that
+lists documents. The term "folder" tends to be used for GUI objects and
+"directory" in the command line.
 
 
 ## Running a command in multiple directories
