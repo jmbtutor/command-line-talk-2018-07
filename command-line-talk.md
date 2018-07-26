@@ -7,7 +7,7 @@ by default.
 
 <http://readline.kablamo.org/emacs.html>
 
-The ones I use most often are:
+Some useful keybindings:
 
 - Ctrl-a: Go to the beginning of the line
 - Ctrl-e: Go to the end of the line
