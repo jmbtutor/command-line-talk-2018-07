@@ -289,7 +289,20 @@ doesn't matter.
 
 ## Viewing files without an editor
 
-To view text files in a terminal, the preferred way is to use a pager.
+If the file is short, you can use `cat` to print the contents of the
+file to stdout. This is a bit of a misuse of the command since its
+purpose is to concatenate files, but it's a convenient side effect.
+
+    cat shortfile
+
+If you only want to see the first few lines or the last few lines, you
+can use the `head` and `tail` commands. The default is 10 lines, but
+that can be changed by passing the `-n` flag with a number.
+
+    head /usr/share/dict/words
+    tail /usr/share/dict/words
+
+The preferred way to properly view a file is to use a pager.
 The pager included with most Unix-like systems is `less`.
 
 You can pass the file as an argument to `less` to view the file. For
