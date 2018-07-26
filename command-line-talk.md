@@ -201,6 +201,92 @@ your `PATH`, especially if it's first, you'll run the malicious
 script instead of the real `ls`.
 
 
+## Reading from and writing to files
+
+Programs have a number of file descriptors from which they can read and
+to which they can write. These file descriptors are identified by
+numbers. Three of them are noteworthy:
+
+- 0 (stdin, for reading),
+- 1 (stdout, for output), and
+- 2 (stderr, for error output).
+
+To write the output of a command to a file, use the output redirect
+operator, `>`, which takes a file path. It will create the file if it
+doesn't exist or truncate it (remove the content) if it does exist, then
+write the program's output to the file. This effectively overwrites the
+file.
+
+For example, to save all the words in the dictionary that start with "a"
+to the file `awords`:
+
+    grep '^a' /usr/share/dict/words >"awords"
+
+You'll often see a space after the `>` in this case, which is also
+valid. You might opt not to add a space for consistency with the other
+uses of the redirect operator.
+
+If you want to append to a file instead, use the append operator, `>>`.
+
+    grep '^a' /usr/share/dict/words >>"awords"
+
+By default, the file descriptor for the output redirect operators is 1,
+stdout. To capture stderr instead, put its file descriptor number, 2,
+immediately before it. This works for all other open file descriptors
+set for writing. For example, to capture the error messages for `ls` on
+a directory you don't have permission to read to the file
+`error-message`:
+
+    ls /root 2>"error-message"
+
+If you want to send both stdout and stderr to a file, redirect stdout to
+a file, then redirect stderr to stdout. To redirect one file descriptor,
+_n_, to another file descriptor, _m_, do `n>&m`. Do not add spaces.
+
+    ls ~ /root >"output" 2>&1
+
+Note that the order matters. If you reverse the order and do `2>&1 >"output"` instead,
+stderr will first redirect to what stdout points to (the terminal), then
+stdout will be redirected to the file; stderr will output to the
+terminal and not to the file.
+
+To read a file into stdin, use the input redirect operator, `<`, which
+also takes a file path. For example, to uppercase the contents of the
+file `text` read from stdin:
+
+    tr 'a-z' 'A-Z' <"text"
+
+You can also combine redirect operators. This will uppercase the
+contents of the file `text` read from stdin and write the output to the
+file `uppercased`:
+
+    tr 'a-z' 'A-Z' <"text" >"uppercased"
+
+### Useless use of `cat`
+
+Doing `cat file | command` is often called a useless use of `cat`. This
+is usually fine for interactive use because you're only running it once,
+but you should avoid it especially for scripts. Using `cat` in a
+pipeline like that no only spawns a process for `cat`, but it also
+spawns a subshell, which may lead to unintended results if you're
+setting variables.
+
+Commands often take in a file to read as an argument, as is the case for
+`grep`:
+
+    grep '^a' /usr/share/dict/words
+
+If not, you can use the input redirect operator, like in the case for
+`tr`:
+
+    tr 'A-Z' 'a-z' </usr/share/dict/words
+
+If you're using `cat` to have the file at the beginning, you can move
+the redirect operator to the beginning. Where you put the redirect
+doesn't matter.
+
+    </usr/share/dict/words tr 'A-Z' 'a-z'
+
 ## Viewing files without an editor
 
 To view text files in a terminal, the preferred way is to use a pager.
