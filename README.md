@@ -361,3 +361,31 @@ command, especially for GNU utilities. If there is no `info` manual for
 the command, it will fall back to the command's man page.
 
     info ls
+
+## Executing multiple commands
+
+You can execute multiple commands on a single line by using the command
+separator `;`. They will run in order.
+
+    TODO
+
+If you only want to run a command if the first one succeeds, use the
+`&&` operator. For example, to `cd` into a directory and list its
+contents:
+
+    cd mydir && ls
+
+Alternatively, if you want to run a command if the first one fails, then
+use the `||` operator. To `cd` into `/root` and output `Failed` if it
+failed:
+
+    cd /root || echo "Failed"
+
+The operators `||` and `&&` are short-circuiting but have equal
+precedence. For example:
+
+    $ { echo 1; true } || { echo 2; false } && echo 3; echo END
+    1
+    3
+    END
+
