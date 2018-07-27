@@ -1,0 +1,127 @@
+## echo and output redirect operators
+echo "Hello World"
+echo "Hello World" >message
+cat message
+echo "Hello again" >>message
+
+## viewing files (short)
+cat message
+
+## (grab the sample files repo)
+git clone https://github.com/jmbtutor/command-line-talk-2018-07
+
+## traversing directories
+cd command-line-talk-2018-07
+pwd
+cd -
+pushd command-line-talk-2018-07
+dirs
+cd
+dirs
+popd
+cd command-line-talk-2018-07/samples
+
+## listing files in a directory
+ls
+ls -l
+ls -l scaling-palm-tree/dir1
+ls -a
+ls -A
+
+## getting help
+man ls
+whatis ls
+# man -f ls
+apropos ls
+# man -k list
+info ls # Linux only
+help cd
+
+## viewing files (long)
+less words
+# j, k, f, b, -N, -S, /, ?, v
+head words
+head -n 20 words
+tail words
+
+# grep
+grep re words
+grep -v re words
+grep -n re words
+grep -C 3 re words
+grep -n -C 3 re words
+
+## history
+# history
+# up / Ctrl-p
+# down / Ctrl-n
+# Ctrl-r
+# !n
+
+# pipelines
+history | grep head
+history | awk '{ print $2 }' | sort | uniq -c | sort -n
+
+## useless use of cat
+cat words | grep l
+grep l words
+grep l <"words"
+tr 'a-z' 'A-Z' <"words"
+
+# removing files, creating directory structures
+touch myfile
+cat <<EOF >myfile
+content
+EOF
+ls myfile
+^ls^rm
+mkdir a
+mkdir -p a/b/c/d
+touch a/b/c/cfile a/b/bfile
+rmdir a/b/c/d
+rmdir a/b/c # will fail
+rm -r a/b/c
+touch nowrite
+chmod -w nowrite
+rm nowrite # will fail
+rm -f nowrite
+
+## keybindings
+# tab
+# Ctrl-a
+# Ctrl-e
+# Meta-f
+# Meta-b
+# Meta-d
+# Meta-Backspace
+# Ctrl-w
+# Ctrl-k
+# Ctrl-y
+# Ctrl-u
+# Ctrl-_
+# Ctrl-x Ctrl-e
+
+## environment variables
+echo "$EDITOR"
+env
+../scripts/print-editor
+../scripts/print-myvar
+myvar="mycontent"
+../scripts/print-myvar # nothing should print
+export myvar
+../scripts/print-myvar
+unset myvar
+../scripts/print-myvar
+myvar="newcontent" ../scripts/echo-myvar
+
+## PATH
+print-hello # should fail
+export PATH="${PWD}/../scripts:${PATH}"
+print-hello
+which print-hello
+( export PATH=".:${PATH}"; ls )
+
+## multiple commands, a command in multiple directories, diff, patch, tee
+echo helol | tee d{1,2,3}/message
+for f in *; do (cd "$f" && patch <../message.patch); done
+cat */message
