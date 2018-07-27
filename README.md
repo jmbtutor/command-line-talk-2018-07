@@ -201,6 +201,32 @@ your `PATH`, especially if it's first, you'll run the malicious
 script instead of the real `ls`.
 
 
+## Pipes
+
+"Do one thing and do it well, and text is the universal interface"; this
+is the Unix philosophy. Unix programs are encouraged to follow this
+philosophy and users are encouraged to take advantage of this.
+
+One of the ways that this philosophy is expressed is through pipes and
+pipelines. A shell pipe, which uses the `|` operator, allows you to take
+the output of a command and connect it to the input of another.
+
+For example, to display the names of the first five positive emoji
+(denoted by a 1 in the fourth column of the CSV file) in the last 50
+lines of `emoji-rank.csv`:
+
+    tail -n 50 emoji-rank.csv | grep -m 5 ',1,' | cut -f 1 -d ','
+
+"Take the last 50 lines of the file `emoji-rank.csv` (`tail`), keep only
+lines matching the regex `,1,` and only the first five of those
+(`grep`), then split the line on `,` and output the first field."
+
+Or something a little more applicable to the job, processing JSON
+returned from an API endpoint:
+
+    curl -s 'https://api.github.com/users/groupby/repos' | jq -r '.[].full_name'
+
+
 ## Reading from and writing to files
 
 Programs have a number of file descriptors from which they can read and
